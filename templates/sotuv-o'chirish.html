@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Sotuvlar | O'chirish {% endblock%}
+{% block bolim %}Ichimliklar{% endblock%}
+{% block users_avatar %}/static/dist/img/user2-160x160.jpg{% endblock %}
+{% block usersname %}Bakirjonov Asadbek{% endblock%}
+{% block section %}{{sotuv.mahsulot.nom}} | {{sotuv.mijoz.ism}} " ni o'chirishni tasdiqlang!{% endblock%}
+{%block sotuv_active%} active {%endblock%}
+{% block content %}
+<form  style="padding:0 40px" method="post" >
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Tasdiqlash</button>
+    <button class="btn btn-primary" >
+         <a href="{% url 'sotuvlar' %}" >Bekor qilish</a>
+    </button>
+</form>
+{% endblock %}

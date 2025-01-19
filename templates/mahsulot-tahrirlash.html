@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Mahsulotlar | Tahrirlash {% endblock%}
+{% block bolim %}Ichimliklaar{% endblock%}
+{% block users_avatar %}/static/dist/img/user2-160x160.jpg{% endblock %}
+{% block usersname %}Bakirjonov Asadbek{% endblock%}
+{% block section %}Mahsulotlar{% endblock%}
+{%block mahsulotlar_active%} active {%endblock%}
+
+{% block content %}
+          <!-- Modal body -->
+          <form style="padding:0 40px" action="#" method="post" >
+               {% csrf_token %}
+              <label >Mahsulot nomi:</label>
+              <input type="text" name="nom" value="{{mahsulot.nom}}" class="form-control" required>
+                <br>
+              <label>Brend nomi:</label>
+              <input type="text" name="brend" value="{{mahsulot.brend}}" class="form-control" required>
+              <br>
+              <label>Kelish narxi:</label>
+              <input type="number" name="narx1"  value="{{mahsulot.narx1}}" class="form-control" required>
+              <br>
+              <label>Sotish narxi:</label>
+              <input type="number" name="narx2"  value="{{mahsulot.narx2}}" class="form-control" required>
+              <br>
+              <label>Miqdor:</label>
+              <input type="number" name="amount" value="{{mahsulot.miqdor}}" class="form-control" required>
+              <br>
+               <label>Olchov:</label>
+              <input type="number" name="amount" value="{{mahsulot.olchov}}" class="form-control" required>
+              <br>
+
+          <!-- Modal footer -->
+            <button type="submit" class="btn btn-success">Yangilash</button>
+            <a href="/goods/"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
+
+      </form>
+
+{% endblock %}
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->

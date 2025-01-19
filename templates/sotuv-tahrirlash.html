@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}sotuvlar | Tahrirlash {% endblock%}
+{% block bolim %}Ichimliklaar{% endblock%}
+{% block users_avatar %}/static/dist/img/user2-160x160.jpg{% endblock %}
+{% block usersname %}Bakirjonov Asadbek{% endblock%}
+{% block section %}Sotuvlar{% endblock%}
+{%block mahsulotlar_active%} active {%endblock%}
+
+{% block content %}
+          <!-- Modal body -->
+          <form style="padding:0 40px" action="#" method="post" >
+               {% csrf_token %}
+                <div class="modal-body">
+              <label >Mahsulotlar:</label>
+             <select name="mahsulot_id" class="form-control">
+                 <option value="{{sotuv.mahsulot.id}}">{{sotuv.mahsulot.nom}}</option>
+                 {% for mahsulot in mahsulotlar %}
+                 <option value="{{mahsulot.id}}">{{mahsulot.nom}} ({{mahsulot.narx2}}) </option>
+                 {% endfor %}
+             </select>
+                  <label >Mijozlar:</label>
+             <select name="mijoz_id" class="form-control">
+                 <option value="{{sotuv.mijoz.id}}">{{sotuv.mijoz.nom}}</option>
+                 {% for mijoz in mijozlar %}
+                 <option value="mijoz.id">{{mijoz.ism}}({{mijoz.narx2}}) </option>
+                 {% endfor %}
+             </select>
+                    <label> Sana:</label>
+              <input type="number" name="sana"  value="{{sotuv.sana| date:'Y-m-d}}" class="form-control" required>
+              <br>
+                    <label>Miqdor ({{ sotuv.mahsulot.olchov }}) :</label>
+              <input type="number" name="amount" value="{{sotuv.miqdor}}" class="form-control" required>
+              <br>
+              <label> Jami:</label>
+              <input type="number" name="jami"  value="{{sotuv.jami}}" class="form-control" required>
+              <br>
+              <label>Tolandi:</label>
+              <input type="number" name="tolandi"  value="{{sotuv.tolandi}}" class="form-control" required>
+              <br>
+
+               <label>Qarz:</label>
+              <input type="number" name="qarz" value="{{sotuv.qarz}}" class="form-control" required>
+              <br>
+
+          <!-- Modal footer -->
+            <button type="submit" class="btn btn-success">Yangilash</button>
+            <a href="/goods/"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
+          </form>
+
+{% endblock %}
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->

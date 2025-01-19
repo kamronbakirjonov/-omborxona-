@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Mijozlar{% endblock%}
+{% block bolim %}Ichimliklaar{% endblock%}
+{% block users_avatar %}/static/dist/img/user2-160x160.jpg{% endblock %}
+{% block usersname %}Bakirjonov Asadbek{% endblock%}
+{% block section %} Mijozlar{% endblock%}
+{%block mijozlar_active%} active {%endblock%}
+
+{% block content %}
+
+<div class="col-md-12">
+    <div class="card card-dark">
+        <div class="card-header border-0">
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Mijoz
+                    qo'shish
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table" style="text-align: center;">
+                <thead>
+                {% if mijozlar.exists %}
+                <tr>
+                    <th scope="col" style="width: 15px">T/r</th>
+                    <th scope="col" style="width: 255px; text-align: center;">FIO</th>
+                    <th scope="col" style="text-align: center;">Do'kon nomi</th>
+                    <th scope="col" style="text-align: center;">Telefon raqami</th>
+                    <th scope="col" style="text-align: center;">Manzili</th>
+                    <th scope="col" style="text-align: center;">Qarz</th>
+                    <th scope="col" style="text-align: center;"></th>
+                </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% if mijozlar.exists %}
+                {% for mijoz in mijozlar %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{mijoz.ism}}</td>
+                    <td>{{mijoz.dokon}}</td>
+                    <td>{{mijoz.tel}}</td>
+                    <td>{{mijoz.manzil}}</td>
+                    <td>{{mijoz.qarz}}</td>
+                    <td>
+                        <a href="/mijozlar/{{ mijoz.id }}/tahrirlash/">
+                            <button type="submit" class="btn btn-warning" data-toggle="modal">
+                                Tahrirlash
+                            </button>
+                        </a>
+                        <a href="/mijozlar/{{ mijoz.id }}/o'chirish">
+                            <button type="submit" class="btn btn-danger" data-toggle="modal">
+                                O'chirish
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr> mijozlar mavjud emas</tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-dark">
+                <h4 class="modal-title">Yangi mijoz</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+        <form  method="post" >
+            {% csrf_token %}
+            <div class="modal-body">
+              <label >Ism:</label>
+              <input type="text" name="ism" placeholder="Mijoz ism..."  class="form-control" required>
+              <br>
+              <label >Do'kon:</label>
+              <input type="text" name="dokon" placeholder="Mijoz do'kon..."  class="form-control" required>
+              <br>
+              <label>Tel:</label>
+              <input type="number" name="tel" placeholder="Mijoz tel..." class="form-control" required>
+              <br>
+                <label>Manzil:</label>
+              <input type="text" name="manzil" placeholder="Mijoz Manzil" class="form-control" required>
+              <br>
+                <label>Qarz:</label>
+              <input type="number" name="qarz" placeholder="Mijoz Qarz" class="form-control" required>
+              <br>
+            </div>
+
+
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Qo`shish</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
+        </div>
+        </form>
+
+    </div>
+</div>
+</div>
+{% endblock %}

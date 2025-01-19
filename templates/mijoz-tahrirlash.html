@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Mijozlar | Tahrirlash {% endblock%}
+{% block bolim %}Ichimliklaar{% endblock%}
+{% block users_avatar %}/static/dist/img/user2-160x160.jpg{% endblock %}
+{% block usersname %}Bakirjonov Asadbek{% endblock%}
+{% block section %}Mijozlar{% endblock%}
+{%block mahsulotlar_active%} active {%endblock%}
+
+{% block content %}
+
+
+<!-- Modal Header -->
+
+<!-- Modal body -->
+<form method="post" action="#" style="padding:0 40px">
+    {% csrf_token %}
+    <label>Mijoz nomi:</label>
+    <input type="text" name="ism" value="{{mijoz.ism}}" class="form-control" required>
+    <br>
+    <label>Do'kon nomi:</label>
+    <input type="text" name="do'kon" value="{{mijoz.dokon}}" class="form-control" required>
+    <br>
+    <label>Telefon raqami:</label>
+    <input type="text" name="tel" value="{{mijoz.tel}}" class="form-control" required>
+    <br>
+    <label>Manzili:</label>
+    <input type="text" name="manzili" value="{{mijojz.manzili}}" class="form-control" required>
+    <br>
+    <label>Qarz:</label>
+    <input type="text" name="qarz" value="{{mijoz.qarz}}" class="form-control" required>
+    <br>
+
+    <!-- Modal footer -->
+    <button type="submit" class="btn btn-success">Yangilash</button>
+    <a href="/clients/">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
+    </a>
+
+</form>
+
+
+<!-- ./wrapper -->
+{% endblock %}

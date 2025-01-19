@@ -1,0 +1,112 @@
+{% extends 'base.html'%}
+{% block title %}Mahsulotlar{% endblock%}
+{% block section %}Mahsulotlar{% endblock%}
+{%block mahsulotlar_active%} active {%endblock%}
+
+{% block content %}
+    <!-- /.content-header -->
+    <div class="col-md-12">
+        <div class="card card-dark">
+            <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Maxsulot qo'shish</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table" style="text-align: center;">
+                    <thead>
+                           {% if mahsulotlar.exists %}
+                        <tr>
+                            <th scope="col" style="width: 15px">T/r</th>
+                            <th scope="col" style="width: 255px; text-align: center;">Nomi</th>
+                            <th scope="col" style="text-align: center;">Brendi</th>
+                            <th scope="col" style="text-align: center;">Kelish</th>
+                            <th scope="col" style="text-align:center;">Sotish</th>
+                            <th scope="col" style="text-align: center;">Miqdori</th>
+                            <th scope="col" style="text-align: center;">Amallar</th>
+                        </tr>
+                    {% endif %}
+                    </thead>
+                    <tbody>
+
+                    {% for mahsulot in mahsulotlar%}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{mahsulot.nom}}</td>
+                            <td>{{mahsulot.brend}}</td>
+                            <td>{{mahsulot.narx1}} so'm</td>
+                            {% if mahsulot.narx2%}
+                            <td>{{mahsulot.narx2}} so'm</td>
+                            {% else %}
+                                <td>Belgilanmagan</td>
+                            {% endif %}
+                            <td>{{mahsulot.miqdor}} {{mahsulot.olchov}}</td>
+                            <td>
+                                <a href="/mahsulotlar/{{ mahsulot.id }}/tahrirlash/">
+                                    <button type="submit" class="btn btn-warning" data-toggle="modal">
+                                    Tahrirlash</button>
+                                </a>
+                                 <a href="/mahsulotlar/{{ mahsulot.id }}/o'chirish/">
+                                     <button type="submit" class="btn btn-danger" data-toggle="modal">
+                                    O'chirish</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header bg-dark">
+            <h4 class="modal-title">Yangi mahsulot</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <form  method="post" >
+            {% csrf_token %}
+            <div class="modal-body">
+              <label >Nomi:</label>
+              <input type="text" name="nom" placeholder="Mahsulot nomi..."  class="form-control" required>
+              <br>
+              <label >Brend:</label>
+              <input type="text" name="brend" placeholder="Mahsulot brendi..."  class="form-control" required>
+              <br>
+              <label>Kelish narxi:</label>
+              <input type="number" name="narx1" placeholder="Kelish narxi..."  class="form-control" required>
+              <br>
+                <label>Sotish narxi:</label>
+              <input type="number" name="narx2" placeholder="Sotish narxi..."  class="form-control" required>
+              <br>
+              <label>Miqdori:</label>
+              <input type="number" name="miqdor" placeholder="Mahsulot miqdori..." class="form-control" required>
+              <br>
+                <label>O'lchov:</label>
+              <input type="text" name="olchov" placeholder="Mahsulot o'lchov" class="form-control" required>
+              <br>
+                <label>Sana:</label>
+              <input type="date" name="sana" value="{{bugun|date:'Y-m-d'}}" class="form-control" required>
+              <br>
+            </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Qo`shish</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
+        </div>
+      </form>
+    
+        </div>
+      </div>
+    </div>
+<!-- ./wrapper -->
+
+{% endblock %}
